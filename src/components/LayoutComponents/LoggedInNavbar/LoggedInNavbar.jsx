@@ -12,6 +12,8 @@ import hamburgerIcon from "/icons/hamburger.png";
 import exitIcon from "/icons/exit.png";
 
 const LoggedInNavbar = () => {
+  // path for custom avatar image (place your ha.jpg at public/images/ha.jpg)
+  const avatarPath = "/images/ha.jpg";
   let [menuState, setMenuState] = useState(false);
   let [showLanguageSettingsModal, setShowLanguageSettingsModal] =
     useState(false);
@@ -58,21 +60,34 @@ const LoggedInNavbar = () => {
           />
         </Link>
         <div className={css.profile}>
-          <img src="/icons/profile.png" className={css.profileIcon} />
+          <img
+            src={avatarPath}
+            className={css.profileIcon}
+            alt="user avatar"
+            onError={(e) => {
+              // fallback to default icon if custom avatar is not found
+              e.target.onerror = null;
+              e.target.src = "/icons/profile.png";
+            }}
+          />
           <div className={css.menuBox}>
             <div className={css.innerMenuBox}>
               <div className={css.prflDiv}>
                 <Link to="/user/profile/settings/basic" className={css.user}>
-                  <div className={css.leftUserDiv}>
+                    <div className={css.leftUserDiv}>
                     <img
-                      src="/icons/profile.png"
+                      src={avatarPath}
                       alt="user profile"
                       className={css.userProfileImg}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/icons/profile.png";
+                      }}
                     />
                   </div>
                   <div className={css.rightUserDiv}>
-                    <div className={css.uname}>Achi Venkata Eswar</div>
-                    <div className={css.email}>venkataeswarachi@gmail.com</div>
+                    <div className={css.uname}>Hemanth Kumar Addagada</div>
+                    <div className={css.email}>addagadahemanth@gmail.com</div>
                   </div>
                 </Link>
               </div>
